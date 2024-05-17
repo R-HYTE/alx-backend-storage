@@ -59,3 +59,27 @@ class Cache:
         if fn:
             return fn(data)
         return data
+
+    def get_str(self, key: str) -> Optional[str]:
+        """
+        Retrieve a string from Redis.
+
+        Args:
+            key (str): The key to retrieve from Redis.
+
+        Returns:
+            Optional[str]: Retrieved string or None if the key does not exist.
+        """
+        return self.get(key, fn=lambda d: d.decode("utf-8"))
+
+    def get_int(self, key: str) -> Optional[int]:
+        """
+        Retrieve an integer from Redis.
+
+        Args:
+            key (str): The key to retrieve from Redis.
+
+        Returns:
+            Optional[int]: Retrieved integer or None if the key does not exist.
+        """
+        return self.get(key, fn=int)
